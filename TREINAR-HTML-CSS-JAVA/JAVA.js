@@ -26,14 +26,14 @@ ctx.imageSmoothingEnabled = false;
 
 let currenteState = GameState.START;
 
-// === ALTERAÇÃO: objeto para guardar dados de jogo
+
 const gameData = {
   score: 0,
   level: 1,
   high: 0,
 };
 
-const showGameData = () => { // ALTERAÇÃO: atualiza UI
+const showGameData = () => { 
   scoreElement.textContent = gameData.score;
   levelElement.textContent = gameData.level;
   highElement.textContent = gameData.high;
@@ -101,7 +101,7 @@ const criarExplocao = (position, size, color) => {
   }
 };
 
-// === ALTERAÇÃO: função para incrementar score
+
 const incrementScore = (value) => {
   gameData.score += value;
   if (gameData.score > gameData.high) {
@@ -109,7 +109,7 @@ const incrementScore = (value) => {
   }
 };
 
-// === ALTERAÇÃO: função para incrementar level
+
 const incrementLevel = () => {
   gameData.level += 1;
 };
@@ -131,7 +131,7 @@ const checkShootAlien = () => {
         grid.alien.splice(alienIndex, 1);
         playerprojeteis.splice(projectileIndex, 1);
 
-        incrementScore(10); // ALTERAÇÃO: incrementa score ao matar alien
+        incrementScore(10); 
 
         break;
       }
@@ -156,7 +156,7 @@ const spawnGrid=() =>{
     grid.cols = Math.round(Math.random()*9+1);
     grid.restart();
 
-    incrementLevel(); // ALTERAÇÃO: incrementa level ao limpar a grid
+    incrementLevel(); 
   }
 };
 
@@ -188,7 +188,7 @@ const gameOver = () => {
     10,
     "red"
   );
-  currenteState = GameState.GAME_OVER; // ALTERAÇÃO: corrigido typo GAMER_OVER -> GAME_OVER
+  currenteState = GameState.GAME_OVER; 
   player.alive = false;
   document.body.append(gameOverScreen);
 };
@@ -198,7 +198,7 @@ const gameLoop = () => {
 
   if (currenteState === GameState.PLAYING) {
 
-    showGameData(); // ALTERAÇÃO: mostra score, level, high
+    showGameData(); 
 
     spawnGrid();
 
@@ -244,9 +244,9 @@ const gameLoop = () => {
 
     ctx.restore();
 
-    drawParticulas(); // ainda desenha partículas da explosão
+    drawParticulas(); 
   }
-  if (currenteState === GameState.GAME_OVER) { // ALTERAÇÃO: corrigido typo
+  if (currenteState === GameState.GAME_OVER) { 
     drawParticulas();
     drawProjeteis();
     grid.draw(ctx);
@@ -310,10 +310,11 @@ buttonRestart.addEventListener("click", () => {
 
   alienprojeteis.length = 0;
 
-  gameData.score = 0;     // ALTERAÇÃO: reset score
-  gameData.level = 1;     // ALTERAÇÃO: reset level
+  gameData.score = 0;     
+  gameData.level = 1;
 
   gameOverScreen.remove();
 });
 
 gameLoop();
+
